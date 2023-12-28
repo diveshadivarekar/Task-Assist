@@ -1,2 +1,1 @@
-# Task-Assist
-personal planner 
+# Task-Assist v5.2
