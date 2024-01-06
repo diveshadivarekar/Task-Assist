@@ -1,6 +1,20 @@
+<br />
+<div align="center">
+  <a href="https://github.com/othneildrew/Best-README-Template">
+    <img src="public/assets/images/logo.svg" alt="Logo" height="100">
+  </a>
+  <h1 align="center">Task Assist</h1>
+</div>
+
 # Task Assist - Personal Planner and Organization Management System
 
 Task Assist is a personal planner and organization management system built with Node.js. It helps users plan and organize their tasks efficiently.
+
+## Built With
+
+- Express js
+- Bootstrap
+- JQuery
 
 ## Features
 
@@ -15,7 +29,6 @@ Task Assist is a personal planner and organization management system built with 
 
    ```
    git clone https://github.com/diveshadivarekar/Task-Assist.git
-   Navigate to the project directory:
    ```
 
 2. Navigate to the project directory:
