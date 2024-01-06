@@ -87,4 +87,3 @@ This project is licensed under the ISC License - see the [LICENSE](/LICENSE) fil
 - Special thanks to the Node.js and Express communities.
 - Inspiration from personal productivity tools.
 <hr><br>
-Feel free to customize this template further based on your project's specific details. Add more sections as needed, such as a "Troubleshooting" section or details on how users can contribute to the project.
