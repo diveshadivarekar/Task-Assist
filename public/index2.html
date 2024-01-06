@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Google Drive API Test</title>
+  </head>
+  <body>
+    <h1>Task Assist File Base v1.2 API Test</h1>
+
+    <button type="button" id="signinButton">Sign in</button>
+    <button type="button" id="signOutButton">Sign Out</button><br />
+    <button id="getDataButton">Get Data from Google Drive</button><br />
+    <!-- 
+    <input type="text" name="data" id="datatb" placeholder="enter your data" /> -->
+    <!-- <button type="button" id="enterbutton">save data</button> -->
+    <div id="data"></div>
+    <ol>
+      <li><a href="add_task.html">add task</a><br /></li>
+      <li><a href="view_task.html">view task</a><br /></li>
+      <br />
+      <li><a href="backend/page-task.html">Task ui</a><br /></li>
+      <li><a href="backend/page-desk.html">Desk ui</a></li>
+    </ol>
+    <script>
+      document.addEventListener("DOMContentLoaded", async () => {
+        const response = await fetch("/signinStatus");
+        if (response.ok) {
+          const data = await response.json();
+          if (data.status) {
+            document.getElementById("signinButton").style.display = "none";
+            document.getElementById("signOutButton").style.display = "block";
+          } else {
+            document.getElementById("signinButton").style.display = "block";
+            document.getElementById("signOutButton").style.display = "none";
+          }
+        }
+      });
+      document
+        .getElementById("signinButton")
+        .addEventListener("click", async () => {
+          // Redirect to the Google sign-in page
+          window.location.href = "/auth/google";
+        });
+
+      document
+        .getElementById("signOutButton")
+        .addEventListener("click", async () => {
+          try {
+            // Perform the sign-out logic (clear tokens, reset session, etc.)
+            const response = await fetch("/signout");
+
+            if (response.ok) {
+              // Sign-out successful, redirect to home or sign-in page
+              window.location.href = "/";
+            } else {
+              // Handle sign-out error
+              console.error("Sign-out failed:", response.statusText);
+            }
+          } catch (error) {
+            console.error("Error during sign-out:", error);
+          }
+        });
+
+      // document
+      //   .getElementById("enterbutton")
+      //   .addEventListener("click", async () => {
+      //     try {
+      //       const data = document.getElementById("datatb").value;
+      //       await fetch(`/saveText/${data}`);
+      //       console.log("save success : " + data);
+      //     } catch (err) {
+      //       console.log("error saving the file " + err);
+      //     }
+      //   });
+
+      document
+        .getElementById("getDataButton")
+        .addEventListener("click", async () => {
+          try {
+            const response = await fetch("/getData");
+
+            if (response.ok) {
+              const data = await response.json();
+
+              for (const file of data) {
+                try {
+                  const fileId = file.id;
+                  const response = await fetch(`/getData/${fileId}`);
+                  const fileData = await response.json();
+
+                  const fileContent = `id: ${file.id}, file name: ${
+                    file.name
+                  }, content: ${fileData.content || "File content not found."}`;
+                  console.log(fileContent);
+                  document.getElementById("data").innerText +=
+                    fileContent + "\n";
+                } catch (error) {
+                  console.error("Error fetching file data:", error);
+                }
+              }
+
+              console.log("Data from Google Drive:", data);
+            } else {
+              // Handle fetch data error
+              console.error("Error fetching data:", response.statusText);
+            }
+          } catch (error) {
+            console.error("Error fetching data:", error);
+          }
+        });
+    </script>
+  </body>
+</html>

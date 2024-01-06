@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <title>Task Assist | Personal Planner</title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="../assets/images/favicon.ico" />
+    <link rel="stylesheet" href="../assets/css/backend-plugin.min.css" />
+    <link rel="stylesheet" href="../assets/css/backend.css?v=1.0.0" />
+    <link
+      rel="stylesheet"
+      href="../assets/vendor/line-awesome/dist/line-awesome/css/line-awesome.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="../assets/vendor/remixicon/fonts/remixicon.css"
+    />
+
+    <link
+      rel="stylesheet"
+      href="../assets/vendor/tui-calendar/tui-calendar/dist/tui-calendar.css"
+    />
+    <link
+      rel="stylesheet"
+      href="../assets/vendor/tui-calendar/tui-date-picker/dist/tui-date-picker.css"
+    />
+    <link
+      rel="stylesheet"
+      href="../assets/vendor/tui-calendar/tui-time-picker/dist/tui-time-picker.css"
+    />
+  </head>
+  <body>
+    <!-- loader Start -->
+    <div id="loading">
+      <div id="loading-center"></div>
+    </div>
+    <!-- loader END -->
+    <script>
+      document.addEventListener("DOMContentLoaded", async () => {
+        const response = await fetch("/signinStatus");
+
+        if (response.ok) {
+          const data = await response.json();
+          console.log(data);
+
+          // Check data.status instead of status
+          if (data.status) {
+            console.log(1);
+            window.location.replace("/backend/index.html");
+          } else {
+            console.log(2);
+            window.location.replace("/backend/auth-sign-in.html");
+          }
+        } else {
+          console.error("Failed to fetch signinStatus");
+        }
+      });
+    </script>
+  </body>
+</html>

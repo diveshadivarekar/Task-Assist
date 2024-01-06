@@ -1,0 +1,49 @@
+<!-- add_task.html -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add Task</title>
+  </head>
+  <body>
+    <h1>Add Task</h1>
+    <form id="addTaskForm">
+      <label for="status">status:</label>
+      <select name="status" id="status">
+        <option value="open">open</option>
+        <option value="in progress">in progress</option>
+        <option value="completed">completed</option>
+      </select>
+
+      <label for="taskName">Task Name:</label>
+      <input type="text" id="taskName" name="taskName" required />
+
+      <label for="assignedTo">Assigned To:</label>
+      <input type="text" id="assignedTo" name="assignedTo" required />
+
+      <label for="dueDate">Due Date:</label>
+      <input type="date" id="dueDate" name="dueDate" required />
+
+      <label for="category">Category:</label>
+      <input type="text" id="category" name="category" required />
+
+      <label for="description">Description:</label>
+      <textarea
+        id="description"
+        name="description"
+        rows="4"
+        required
+      ></textarea>
+
+      <label for="checklist">Checklist (comma-separated):</label>
+      <input type="text" id="checklist" name="checklist" />
+
+      <label for="attachments">Attachments (comma-separated):</label>
+      <input type="text" id="attachments" name="attachments" />
+
+      <button type="button" onclick="addTask()">Add Task</button>
+    </form>
+    <script src="js/add_task.js"></script>
+  </body>
+</html>
