@@ -1,7 +1,7 @@
 {
-  "name": "node-drive",
-  "version": "1.2.0",
-  "description": "",
+  "name": "Task-Assist",
+  "version": "0.5.2",
+  "description": "Personal Planner",
   "main": "index.js",
   "type": "module",
   "scripts": {
@@ -10,7 +10,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
+  "author": "Divesh Adivarekar, Shashank Mahajan, Prathamesh Navale, Rudra Chintalwar",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.20.2",
