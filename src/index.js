@@ -288,6 +288,78 @@ app.get("/task-data/:fileId", async (req, res) => {
   }
 });
 
+//employee dir
+app.post("/add-employee", async (req, res) => {
+  const newTaskData = req.body;
+  const folderName = FolderName;
+  const fileName = "employee.json";
+
+  try {
+    // const folderId = await createFolder();
+    // Upload the file to the folder
+    console.log(newTaskData);
+    await createFile(fileName, newTaskData);
+
+    console.log("File created successfully in folder:", folderName);
+    res.json({ message: "Success" });
+  } catch (error) {
+    console.error("Error creating file:", error);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
+// API endpoint to get task data
+app.get("/employee-data", async (req, res) => {
+  try {
+    // Search for the folder by name
+    const folderName = FolderName;
+    const folderResponse = await drive.files.list({
+      q: `mimeType='application/vnd.google-apps.folder' and name='${folderName}'`,
+      fields: "files(id, name)",
+    });
+    const folder = folderResponse.data.files[0];
+
+    if (folder) {
+      // Use the obtained folder ID to fetch data from the folder
+      const folderId = folder.id;
+      const response = await drive.files.list({
+        mimeType: "text/plain",
+        q: `'${folderId}' in parents`,
+        fields: "files(id, name)",
+      });
+
+      const files = response.data.files;
+
+      if (files && files.length) {
+        res.json(files);
+      } else {
+        console.log("No files found in the folder.");
+        res.json([]);
+      }
+    } else {
+      console.log("Folder not found.");
+      res.json([]);
+    }
+  } catch (error) {
+    res.status(500).redirect("/backend/pages-error-500.html");
+    console.error("Error fetching data from Google Drive:", error.message);
+  }
+});
+
+app.get("/employee-data/:fileId", async (req, res) => {
+  const fileId = req.params.fileId;
+
+  try {
+    const fileContent = await drive.files.get({ fileId, alt: "media" });
+    const data = fileContent.data;
+
+    res.json(data);
+  } catch (error) {
+    console.error("Error reading data from Google Drive:", error);
+    res.status(500).redirect("/backend/pages-error-500.html");
+  }
+});
+
 app.get("/signinStatus", async (req, res) => {
   try {
     const creds = fs.readFileSync("creds.json");

@@ -1,0 +1,34 @@
+<!-- add_employee.html -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add Employee</title>
+  </head>
+  <body>
+    <h1>Add Employee</h1>
+    <form id="addEmployeeForm">
+      <label for="profilePhoto">Profile Photo URL:</label>
+      <input type="text" id="profilePhoto" name="profilePhoto" required />
+
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required />
+
+      <label for="phoneNumber">Phone Number:</label>
+      <input type="tel" id="phoneNumber" name="phoneNumber" required />
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required />
+
+      <label for="type">Type:</label>
+      <input type="text" id="type" name="type" required />
+
+      <label for="role">Role:</label>
+      <input type="text" id="role" name="role" required />
+
+      <button type="button" onclick="addEmployee()">Add Employee</button>
+    </form>
+    <script src="js/add_employee.js"></script>
+  </body>
+</html>
