@@ -7422,6 +7422,7 @@ a.text-white:hover, a.text-white:focus {
 .sidebar-default .sidebar-bottom {
   padding-top: 100px !important; }
   .sidebar-default .sidebar-bottom .sidebarbottom-content {
+    display: none;
     text-align: center; }
   .sidebar-default .sidebar-bottom .image {
     margin-top: -30px; }
