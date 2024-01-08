@@ -19,9 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
           } else {
             const listItem = document.createElement("div");
             listItem.className = "col-lg-4";
-            // listItem.classList.add("col-md-6", "col-lg-4");
             const fileContent = `
-          
           <div class="">
                 <div
                   class="card-transparent card-block card-stretch card-height"
@@ -66,7 +64,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                         </ul>
                         <div class="pt-3 border-top">
-                          <a href="#" class="btn btn-primary">Message</a>
+                          <a href="https://api.whatsapp.com/send?phone=${fileData.phoneNumber}&text=hey,%20${fileData.name}!" target="_blank" class="btn btn-primary">Message</a>
                         </div>
                       </div>
                     </div>
@@ -86,3 +84,38 @@ document.addEventListener("DOMContentLoaded", () => {
     })
     .catch((error) => console.error("Error fetching employee data:", error));
 });
+
+// add_employee.js
+function addEmployee() {
+  // const profilePhoto = document.getElementById("profilePhoto").value;
+  const name = document.getElementById("name").value;
+  const phoneNumber = document.getElementById("phoneNumber").value;
+  const email = document.getElementById("email").value;
+  // const type = document.getElementById("type").value;
+  // const role = document.getElementById("role").value;
+
+  const employeeData = {
+    // profilePhoto: profilePhoto,
+    name: name,
+    phoneNumber: phoneNumber,
+    email: email,
+    // type: type,
+    // role: role,
+  };
+
+  // Send the employee data to the server
+  fetch("/add-employee", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(employeeData),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      alert(data.message);
+      // Redirect to the employee_data.html page
+      window.location.href = "page-employee.html";
+    })
+    .catch((error) => console.error("Error adding employee:", error));
+}
