@@ -7506,6 +7506,8 @@ a.text-white:hover, a.text-white:focus {
       text-decoration: none; }
   .iq-sidebar-logo img {
     height: 30px;
+    scale: 250%;
+    margin-left: 20px;
     margin-right: 10px; }
   .iq-sidebar-logo .logo-title {
     font-weight: 800;
