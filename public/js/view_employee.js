@@ -14,7 +14,6 @@ document.addEventListener("DOMContentLoaded", () => {
           const fileId = file.id;
           const response = await fetch(`/employee-data/${fileId}`);
           const fileData = await response.json();
-          // document.getElementById("taskcount").innerHTML = `Task #${count}`;
           console.log(fileData);
           const fileContent = `
           <img src="${fileData.profilePhoto}" alt="Profile Photo" style="width: 100px; height: 100px;"><br>

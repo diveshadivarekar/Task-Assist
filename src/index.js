@@ -66,8 +66,11 @@ app.get("/google/redirect", async (req, res) => {
   try {
     const { code } = req.query;
     const { tokens } = await oauth2Client.getToken(code);
-    oauth2Client.setCredentials(tokens);
+
+
+    console.log({ tokens });
     fs.writeFileSync("creds.json", JSON.stringify(tokens));
+    console.log(JSON.stringify(tokens));
     res.redirect("/backend/");
   } catch (err) {
     console.error("Error making request", err);

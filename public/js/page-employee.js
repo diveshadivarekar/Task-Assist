@@ -19,6 +19,13 @@ document.addEventListener("DOMContentLoaded", () => {
           } else {
             const listItem = document.createElement("div");
             listItem.className = "col-lg-4";
+            let profile;
+            if (!fileData.profilePhoto) {
+              profile =
+                "https://cdn3d.iconscout.com/3d/premium/thumb/profile-9990712-8081897.png";
+            } else {
+              profile = fileData.profilePhoto;
+            }
             const fileContent = `
           <div class="">
                 <div
@@ -28,7 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     <div class="item">
                       <div class="odr-img">
                         <img
-                          src="${fileData.profilePhoto}"
+                          src="${profile}"
                           class="img-fluid rounded-circle avatar-90 m-auto"
                           alt="${fileData.name}"
                         />
