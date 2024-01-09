@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         <img
                           src="${fileData.profilePhoto}"
                           class="img-fluid rounded-circle avatar-90 m-auto"
-                          alt="image"
+                          alt="${fileData.name}"
                         />
                       </div>
                       <div class="odr-content rounded">
@@ -46,7 +46,9 @@ document.addEventListener("DOMContentLoaded", () => {
                           </li>
                         </a>
 
-                        <a href="https://api.whatsapp.com/send?phone=${fileData.phoneNumber}&text=hey,%20${fileData.name}!" target ="_blank"> 
+                        <a href="https://api.whatsapp.com/send?phone=${
+                          fileData.phoneNumber
+                        }&text=hey,%20${fileData.name}!" target ="_blank"> 
                           <li
                             class="bg-primary-light rounded-circle iq-card-icon-small mr-4"
                           >
@@ -64,7 +66,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
                         </ul>
                         <div class="pt-3 border-top">
-                          <a href="https://api.whatsapp.com/send?phone=${fileData.phoneNumber}&text=hey,%20${fileData.name}!" target="_blank" class="btn btn-primary">Message</a>
+                          <a href="https://api.whatsapp.com/send?phone=${
+                            fileData.phoneNumber
+                          }&text=hey,%20${
+              fileData.name
+            }!" target="_blank" class="btn btn-primary">Message</a>
+                        </div>
+                        <div class="pt-3 border-top">
+                          <a href="#" class="btn btn-primary"><button type='button onclick='${console.log(
+                            "delete this " + file.id + "," + file.name
+                          )}'>Delete</button></a>
                         </div>
                       </div>
                     </div>
