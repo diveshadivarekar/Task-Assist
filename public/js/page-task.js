@@ -4,6 +4,7 @@
 //to view the task
 document.addEventListener("DOMContentLoaded", () => {
   const taskDataList = document.getElementById("taskdiv");
+  let taskcount = 0;
 
   // Fetch task data from tasks.json
   fetch("/task-data")
@@ -21,6 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
           if (data.length === 0) {
             taskDataList.innerHTML = "<p>No task data available.</p>";
           } else {
+            taskcount++;
             const taskItem = document.createElement("div");
             taskItem.className = "col-lg-12";
             taskItem.innerHTML = `
@@ -70,17 +72,17 @@ document.addEventListener("DOMContentLoaded", () => {
                                   <a
                                     class="btn bg-secondary-light"
                                     data-toggle="collapse"
-                                    href="#collapseEdit1"
+                                    href="#collapseEdit${taskcount}"
                                     role="button"
                                     aria-expanded="false"
-                                    aria-controls="collapseEdit1"
+                                    aria-controls="collapseEdit${taskcount}"
                                     ><i class="ri-edit-box-line m-0"></i
                                   ></a>
                                 </div>
                               </div>
                             </div>
                           </div>
-                          <div class="collapse" id="collapseEdit1">
+                          <div class="collapse" id="collapseEdit${taskcount}">
                             <div class="card card-list task-card">
                               <div
                                 class="card-header d-flex align-items-center justify-content-between px-0 mx-3"
