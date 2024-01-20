@@ -92,6 +92,41 @@ app.get("/google/redirect", async (req, res) => {
   }
 });
 
+app.get("/getUserProfile", async (req, res) => {
+  try {
+    // Check if 'oauthTokens' cookie exists in the request
+    const oauthTokensCookie = req.cookies.oauthTokens;
+
+    if (!oauthTokensCookie) {
+      res.status(401).json({ error: "Unauthorized" });
+      return;
+    }
+
+    const tokens = JSON.parse(oauthTokensCookie);
+
+    // Set OAuth credentials
+    oauth2Client.setCredentials(tokens);
+
+    // Create a Google People API instance
+    const peopleApi = google.people({ version: "v1", auth: oauth2Client });
+
+    // Get user profile information
+    const userInfo = await peopleApi.people.get({
+      resourceName: "people/me",
+      personFields: "names,photos",
+    });
+
+    // Extract user's name and profile photo
+    const userName = userInfo.data.names[0].displayName;
+    const userPhotoUrl = userInfo.data.photos[0].url;
+
+    res.json({ name: userName, photoUrl: userPhotoUrl });
+  } catch (err) {
+    console.error("Error getting user profile", err);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
 app.get("/saveText/:sometext", async (req, res) => {
   const sometext = req.params.sometext;
 
