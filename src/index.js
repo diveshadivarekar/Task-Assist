@@ -4,8 +4,10 @@ import { google } from "googleapis";
 import express from "express";
 import bodyParser from "body-parser";
 import fs from "fs";
+import cookieParser from "cookie-parser";
 
 const app = express();
+app.use(cookieParser());
 
 const HOST = "localhost";
 const PORT = process.env.PORT;
@@ -29,12 +31,20 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // check if creds are present in a text file
 // load them otherwise do nothing
-try {
-  const creds = fs.readFileSync("creds.json");
-  oauth2Client.setCredentials(JSON.parse(creds));
-} catch (err) {
-  console.log("no creds found");
-}
+app.use((req, res, next) => {
+  const oauthTokensCookie = req.cookies.oauthTokens;
+
+  if (oauthTokensCookie) {
+    try {
+      const tokens = JSON.parse(oauthTokensCookie);
+      oauth2Client.setCredentials(tokens);
+    } catch (err) {
+      console.error("Error parsing OAuth tokens from cookie", err);
+    }
+  }
+
+  next();
+});
 
 // Serve the HTML file
 // app.get("/", (req, res) => {
@@ -67,13 +77,18 @@ app.get("/google/redirect", async (req, res) => {
     const { code } = req.query;
     const { tokens } = await oauth2Client.getToken(code);
 
+    // Store tokens in a cookie named 'oauthTokens'
+    res.cookie("oauthTokens", JSON.stringify(tokens), {
+      maxAge: process.env.COOKIE_EXPIRE, // Set an expiration time if needed (in milliseconds)
+      httpOnly: true, // Make the cookie accessible only on the server side
+      secure: process.env.NODE_ENV === "production", // Set secure flag based on the environment
+    });
 
     console.log({ tokens });
-    fs.writeFileSync("creds.json", JSON.stringify(tokens));
-    console.log(JSON.stringify(tokens));
     res.redirect("/backend/");
   } catch (err) {
     console.error("Error making request", err);
+    res.status(500).send("Internal Server Error");
   }
 });
 
@@ -365,18 +380,33 @@ app.get("/employee-data/:fileId", async (req, res) => {
 
 app.get("/signinStatus", async (req, res) => {
   try {
-    const creds = fs.readFileSync("creds.json");
-    oauth2Client.setCredentials(JSON.parse(creds));
-    res.json({ status: true });
+    const oauthTokensCookie = req.cookies.oauthTokens;
+
+    if (oauthTokensCookie) {
+      const tokens = JSON.parse(oauthTokensCookie);
+      oauth2Client.setCredentials(tokens);
+      res.json({ status: true });
+    } else {
+      res.json({ status: false });
+    }
   } catch (err) {
+    console.error(
+      "Error setting credentials or parsing OAuth tokens from cookie",
+      err
+    );
     res.json({ status: false });
   }
 });
 
 app.get("/signout", (req, res) => {
   try {
-    if (fs.existsSync("creds.json")) fs.writeFileSync("creds.json", "");
-    // res.json({ message: "Sign-out successful" });
+    // Delete the 'oauthTokens' cookie
+    res.clearCookie("oauthTokens");
+
+    // Optionally, you can also remove any existing 'creds.json' file
+    // if (fs.existsSync("creds.json")) fs.unlinkSync("creds.json");
+
+    // Redirect or respond as needed
     res.redirect("/");
   } catch (error) {
     console.error("Error during sign-out:", error);

@@ -1,6 +1,6 @@
 {
   "name": "Task-Assist",
-  "version": "0.5.2",
+  "version": "0.5.3",
   "description": "Personal Planner",
   "main": "index.js",
   "type": "module",
@@ -14,6 +14,7 @@
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.20.2",
+    "cookie-parser": "^1.4.6",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "googleapis": "^129.0.0"
