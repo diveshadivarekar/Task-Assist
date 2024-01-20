@@ -62,6 +62,11 @@
         transform: scale(1.02);
       }
     </style>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        fetch("/signout");
+      });
+    </script>
   </head>
   <script src="../js/handleSignin.js"></script>
   <body class=" ">

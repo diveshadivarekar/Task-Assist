@@ -1,5 +1,18 @@
 document.addEventListener("DOMContentLoaded", async () => {
   try {
+    try {
+      const response = await fetch("/signinStatus");
+      if (response.ok) {
+        const data = await response.json();
+        if (!data.status) {
+          window.location.href = "/backend/auth-sign-in.html";
+        }
+      } else {
+        console.error("Failed to fetch signinStatus:", response.statusText);
+      }
+    } catch (error) {
+      console.error("Error:", error.message);
+    }
     const response = await fetch("/getUserProfile");
     const data = await response.json();
 
