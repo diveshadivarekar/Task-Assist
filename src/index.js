@@ -5,6 +5,7 @@ import express from "express";
 import bodyParser from "body-parser";
 import fs from "fs";
 import cookieParser from "cookie-parser";
+import CryptoJS from "crypto-js";
 
 const app = express();
 app.use(cookieParser());
