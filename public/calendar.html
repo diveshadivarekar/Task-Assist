@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Google Calendar Events</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+      }
+
+      .event-item {
+        border: 1px solid #ccc;
+        padding: 10px;
+        margin-bottom: 10px;
+      }
+
+      .event-link {
+        color: #4285f4;
+        text-decoration: none;
+        font-weight: bold;
+      }
+
+      .event-dates {
+        margin-top: 5px;
+        color: #555;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="events-container"></div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", async () => {
+        // Make the API call to fetch events
+        const response = await fetch("/google/calendar");
+        const data = await response.json();
+        const events = data.events;
+
+        // Get the container element to append events
+        const eventsContainer = document.getElementById("events-container");
+
+        // Check if there are events to display
+        if (events && events.length > 0) {
+          // Loop through each event and create HTML content
+          const eventsHTML = events
+            .map((event) => {
+              const startDate = new Date(event.start.date);
+              const endDate = new Date(event.end.date);
+              const dateFormatOptions = {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              };
+
+              return `
+        <div class="event-item">
+          <a href="${event.htmlLink}" class="event-link">${event.summary}</a>
+          <div class="event-dates">
+            Date: ${startDate.toLocaleDateString(
+              "en-US",
+              dateFormatOptions
+            )} - ${endDate.toLocaleDateString("en-US", dateFormatOptions)}
+          </div>
+        </div>
+      `;
+            })
+            .join("");
+
+          // Set the innerHTML of eventsContainer
+          eventsContainer.innerHTML = eventsHTML;
+        } else {
+          // Display a message if there are no events
+          eventsContainer.textContent = "No events available.";
+        }
+      });
+    </script>
+  </body>
+</html>

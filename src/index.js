@@ -69,6 +69,7 @@ app.get("/auth/google", (req, res) => {
     scope: [
       "https://www.googleapis.com/auth/userinfo.profile",
       "https://www.googleapis.com/auth/drive",
+      "https://www.googleapis.com/auth/calendar.readonly",
     ],
   });
   res.redirect(url);
@@ -91,6 +92,47 @@ app.get("/google/redirect", async (req, res) => {
   } catch (err) {
     console.error("Error making request", err);
     res.status(500).send("Internal Server Error");
+  }
+});
+
+app.get("/google/calendar", async (req, res) => {
+  try {
+    // Check if 'oauthTokens' cookie exists in the request
+    const oauthTokensCookie = req.cookies.oauthTokens;
+
+    if (!oauthTokensCookie) {
+      res.status(401).json({ error: "Unauthorized" });
+      return;
+    }
+
+    const tokens = JSON.parse(oauthTokensCookie);
+
+    // Set OAuth credentials
+    oauth2Client.setCredentials(tokens);
+
+    // Example: Fetch upcoming events
+    const calendar = google.calendar({ version: "v3", auth: oauth2Client });
+    calendar.events.list(
+      {
+        calendarId: "primary",
+        timeMin: new Date().toISOString(),
+        maxResults: 10,
+        singleEvents: true,
+        orderBy: "startTime",
+      },
+      (err, response) => {
+        if (err) {
+          console.error("Error fetching events:", err);
+          return res.status(500).json({ error: "Error fetching events" + err });
+        }
+
+        const events = response.data.items || [];
+        res.json({ events });
+      }
+    );
+  } catch (error) {
+    console.error("Error:", error);
+    res.status(500).json({ error: "Internal Server Error" });
   }
 });
 
