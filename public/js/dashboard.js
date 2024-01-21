@@ -45,9 +45,9 @@ document.addEventListener("DOMContentLoaded", async () => {
       ></path>
     </svg>
         <div class="pl-3 border-left">
-          <h5 class="mb-1"><a href="${event.htmlLink}" class="event-link">${
-          event.summary
-        }</a></h5>
+          <h5 class="mb-1"><a href="${
+            event.htmlLink
+          }" class="event-link" target="_blank">${event.summary}</a></h5>
           <p class="mb-0">Date: ${startDate.toLocaleDateString(
             "en-US",
             dateFormatOptions
@@ -67,30 +67,3 @@ document.addEventListener("DOMContentLoaded", async () => {
     eventsContainer.textContent = "No events available.";
   }
 });
-
-// {
-//   <div class="card card-list">
-//     <div class="card-body">
-//       <div class="d-flex align-items-center">
-//         <svg
-//           class="svg-icon text-secondary mr-3"
-//           width="24"
-//           height="24"
-//           xmlns="http://www.w3.org/2000/svg"
-//           viewBox="0 0 24 24"
-//           fill="none"
-//           stroke="currentColor"
-//           stroke-width="2"
-//           stroke-linecap="round"
-//           stroke-linejoin="round"
-//         >
-//           <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-//         </svg>
-//         <div class="pl-3 border-left">
-//           <h5 class="mb-1">Direct Development</h5>
-//           <p class="mb-0">Unveling the design system</p>
-//         </div>
-//       </div>
-//     </div>
-//   </div>;
-// }
