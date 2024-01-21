@@ -6,6 +6,7 @@ import bodyParser from "body-parser";
 import fs from "fs";
 import cookieParser from "cookie-parser";
 import CryptoJS from "crypto-js";
+import axios from "axios";
 
 const app = express();
 app.use(cookieParser());
@@ -412,6 +413,49 @@ app.get("/employee-data/:fileId", async (req, res) => {
     console.error("Error reading data from Google Drive:", error);
     res.status(500).redirect("/backend/pages-error-500.html");
   }
+});
+
+app.get("/delete-file/:fileId", async (req, res) => {
+  // Check if 'oauthTokens' cookie exists in the request
+  const oauthTokensCookie = req.cookies.oauthTokens;
+
+  if (!oauthTokensCookie) {
+    res.status(401).json({ error: "Unauthorized" });
+    return;
+  }
+
+  const tokens = JSON.parse(oauthTokensCookie);
+
+  // Set existing OAuth credentials
+  oauth2Client.setCredentials(tokens);
+
+  const fileId = req.params.fileId;
+
+  const deleteFile = async () => {
+    try {
+      const response = await axios.delete(
+        `https://www.googleapis.com/drive/v2/files/${fileId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${tokens.access_token}`,
+          },
+        }
+      );
+
+      console.log("File deleted successfully:", response.data);
+      res
+        .status(200)
+        .json({ success: true, message: "File deleted successfully" });
+    } catch (error) {
+      console.error(
+        "Error deleting file:",
+        error.response ? error.response.data : error.message
+      );
+      res.status(500).json({ success: false, message: "Error deleting file" });
+    }
+  };
+
+  deleteFile();
 });
 
 app.get("/signinStatus", async (req, res) => {

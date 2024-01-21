@@ -20,9 +20,10 @@ document.addEventListener("DOMContentLoaded", () => {
             const listItem = document.createElement("div");
             listItem.className = "col-lg-4";
             let profile;
+            const randomWord = Math.random().toString(36).substring(2, 8);
             if (!fileData.profilePhoto) {
-              profile =
-                "https://cdn3d.iconscout.com/3d/premium/thumb/profile-9990712-8081897.png";
+              profile = "https://robohash.org/" + randomWord;
+              // "https://cdn3d.iconscout.com/3d/premium/thumb/profile-9990712-8081897.png";
             } else {
               profile = fileData.profilePhoto;
             }
@@ -53,9 +54,7 @@ document.addEventListener("DOMContentLoaded", () => {
                           </li>
                         </a>
 
-                        <a href="https://api.whatsapp.com/send?phone=${
-                          fileData.phoneNumber
-                        }&text=hey,%20${fileData.name}!" target ="_blank"> 
+                        <a href="https://api.whatsapp.com/send?phone=${fileData.phoneNumber}&text=hey,%20${fileData.name}!" target ="_blank"> 
                           <li
                             class="bg-primary-light rounded-circle iq-card-icon-small mr-4"
                           >
@@ -72,17 +71,15 @@ document.addEventListener("DOMContentLoaded", () => {
                         </a>
 
                         </ul>
-                        <div class="pt-3 border-top">
-                          <a href="https://api.whatsapp.com/send?phone=${
-                            fileData.phoneNumber
-                          }&text=hey,%20${
-              fileData.name
-            }!" target="_blank" class="btn btn-primary">Message</a>
+                        <div class="container overflow-hidden text-center">
+                        <div class ="row gx-5">
+                        <div class="pt-3 border-top col">
+                          <a href="https://api.whatsapp.com/send?phone=${fileData.phoneNumber}&text=hey,%20${fileData.name}!" target="_blank" class="btn btn-primary">Message</a>
                         </div>
-                        <div class="pt-3 border-top">
-                          <a href="#" class="btn btn-primary"><button type='button onclick='${console.log(
-                            "delete this " + file.id + "," + file.name
-                          )}'>Delete</button></a>
+                        <div class="pt-3 col">
+                          <a href="#" class="btn btn-primary" onclick='deleteFile("${file.id}")'>Delete</a>
+                        </div>
+                        </div>
                         </div>
                       </div>
                     </div>
@@ -102,6 +99,20 @@ document.addEventListener("DOMContentLoaded", () => {
     })
     .catch((error) => console.error("Error fetching employee data:", error));
 });
+
+function deleteFile(fileId) {
+  fetch(`/delete-file/${fileId}`, {
+    method: "GET",
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data); // Handle the response as needed
+    })
+    .catch((error) => {
+      console.error("Error deleting file:", error);
+    });
+  location.reload();
+}
 
 // add_employee.js
 function addEmployee() {
