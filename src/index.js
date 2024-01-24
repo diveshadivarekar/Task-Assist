@@ -87,7 +87,7 @@ app.get("/google/redirect", async (req, res) => {
       secure: process.env.NODE_ENV === "production", // Set secure flag based on the environment
     });
 
-    console.log({ tokens });
+    //console.log({ tokens });
     res.redirect("/backend/");
   } catch (err) {
     console.error("Error making request", err);
