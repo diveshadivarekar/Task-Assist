@@ -22,7 +22,8 @@ document.addEventListener("DOMContentLoaded", () => {
             let profile;
             const randomWord = Math.random().toString(36).substring(2, 8);
             if (!fileData.profilePhoto) {
-              profile = "https://robohash.org/" + randomWord;
+              // profile = "https://robohash.org/" + randomWord;
+              profile = "https://robohash.org/" + fileData.name;
               // "https://cdn3d.iconscout.com/3d/premium/thumb/profile-9990712-8081897.png";
             } else {
               profile = fileData.profilePhoto;
