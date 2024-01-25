@@ -11,8 +11,8 @@ import axios from "axios";
 const app = express();
 app.use(cookieParser());
 
-const HOST = "localhost";
-const PORT = process.env.PORT;
+const HOST = process.env.HOST || "localhost";
+const PORT = process.env.PORT || 3000;
 const FolderName = process.env.FOLDER_NAME;
 
 const oauth2Client = new google.auth.OAuth2(
