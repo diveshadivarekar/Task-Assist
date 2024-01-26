@@ -230,7 +230,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // to add task
 function addTask() {
-  const status = document.getElementById("status").value || "open";
+  // const status = document.getElementById("status").value || "open";
   const taskName = document.getElementById("taskName").value;
   const assignedTo = document.getElementById("assignedTo").value;
   const dueDate = document.getElementById("dueDate").value;
@@ -240,20 +240,21 @@ function addTask() {
     .getElementById("checklist")
     .value.split(",")
     .map((item) => item.trim());
-  const attachments = document
-    .getElementById("attachments")
-    .value.split(",")
-    .map((item) => item.trim());
+
+  // const attachments = document
+  //   .getElementById("attachments")
+  //   .value.split(",")
+  //   .map((item) => item.trim());
 
   const taskData = {
-    status: status,
+    status: "open",
     taskName: taskName,
     assignedTo: assignedTo,
     dueDate: dueDate,
     category: category,
     description: description,
     checklist: checklist,
-    attachments: attachments,
+    // attachments: attachments,
   };
 
   // Send the task data to the server
@@ -268,7 +269,7 @@ function addTask() {
     .then((data) => {
       alert(data.message);
       // Redirect to the view_tasks.html page
-      window.location.href = "view_task.html";
+      window.location.href = "#";
     })
     .catch((error) => console.error("Error adding task:", error));
 }
