@@ -1,3 +1,7 @@
+// As per rudra's plan the project dir should contain the file id of the respective tasks
+// the project dir should be eaily update able when new task is added in the project (api endpoint is created and uses stream)
+// this is the basic plan that whould be implemeted in stable version of v0.5.4 (v0.5.3 require the add task and page_task to be optimized and #15 should be resolved )
+
 import dotenv from "dotenv";
 dotenv.config();
 import { google } from "googleapis";
@@ -7,6 +11,7 @@ import fs from "fs";
 import cookieParser from "cookie-parser";
 import CryptoJS from "crypto-js";
 import axios from "axios";
+import stream from "stream";
 
 const app = express();
 app.use(cookieParser());
@@ -48,6 +53,7 @@ app.use((req, res, next) => {
   next();
 });
 
+// this code is replaced by { app.use(express.static("public")); }
 // Serve the HTML file
 // app.get("/", (req, res) => {
 //   try {
@@ -454,6 +460,33 @@ app.get("/employee-data/:fileId", async (req, res) => {
   } catch (error) {
     console.error("Error reading data from Google Drive:", error);
     res.status(500).redirect("/backend/pages-error-500.html");
+  }
+});
+
+app.post("/updateFile/:fileId", async (req, res) => {
+  try {
+    const fileId = req.params.fileId;
+    const content = req.body.content;
+
+    const buf = Buffer.from(content, "binary");
+    const buffer = Uint8Array.from(buf);
+    const bufferStream = new stream.PassThrough();
+    bufferStream.end(buffer);
+
+    const media = {
+      mimeType: "application/vnd.google-apps.document",
+      body: bufferStream,
+    };
+
+    const response = await drive.files.update({
+      fileId: fileId,
+      media: media,
+    });
+
+    res.json({ success: true, data: response.data });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, error: error.message });
   }
 });
 

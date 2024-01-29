@@ -57,11 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                           task.checklist.length
                                         }/${task.checklist.length}
                                       </div>
-                                      <div class="btn bg-body">
-                                        <i class="ri-survey-line mr-2"></i> ${
-                                          task.attachments.length
-                                        } 
-                                      </div>
+                                      
                                     </div>
                                   </div>
                                 </div>
@@ -114,7 +110,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                   <input
                                     type="text"
                                     class="form-control bg-white"
-                                    placeholder="${task.taskName}"
+                                    value="${task.taskName}"
                                   />
                                   <a
                                     href="#"
@@ -130,17 +126,11 @@ document.addEventListener("DOMContentLoaded", () => {
                                           <label for="exampleInputText2" class="h5"
                                             >Memebers</label
                                           >
-                                          <select
-                                            name="type"
-                                            class="selectpicker form-control"
-                                            data-style="py-0"
-                                          >
-                                            <option>Memebers</option>
-                                            <option>Divesh Adivarekar</option>
-                                            <option>Shashank Mahajan</option>
-                                            <option>Prathamesh Navale</option>
-                                            <option>Rudra Chintalwar</option>
-                                          </select>
+                                            <input
+                                              type="text"
+                                              class="form-control bg-white"
+                                              value="${task.assignedTo}"
+                                            />
                                         </div>
                                       </div>
                                       <div class="col-lg-6">
@@ -152,7 +142,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                             type="date"
                                             class="form-control"
                                             id="exampleInputText3"
-                                            value=""
+                                            value="${task.dueDate}"
                                           />
                                         </div>
                                       </div>
@@ -165,7 +155,12 @@ document.addEventListener("DOMContentLoaded", () => {
                                       <div class="col-lg-6">
                                         <h5 class="mb-2">Description</h5>
                                         <p class="mb-0">
-                                        ${task.description}
+                                          <input
+                                            type="text"
+                                            class="form-control bg-white"
+                                            value="${task.description}"
+                                          />
+                                        
                                         </p>
                                       </div>
                                       <div class="col-lg-6">
@@ -183,34 +178,19 @@ document.addEventListener("DOMContentLoaded", () => {
                                           <label
                                             class="custom-control-label mb-1"
                                             for="customCheck1"
-                                            >${task.checklist.join(",")}</label
+                                            >${convertToChecklist(
+                                              task.checklist,
+                                              checklist
+                                            )}</label
                                           >
                                         </div>
-                                        <script>console.log("i am in checklist")
-                                        </script>
                                           </div>
                                         </div>
                                       </div>
                                     </div>
                                   </div>
                                 </div>
-                                <div class="form-group mb-0">
-                                  <label for="exampleInputText01" class="h5"
-                                    >Attachments</label
-                                  >
-                                  <div class="custom-file">
-                                    <input
-                                      type="file"
-                                      class="custom-file-input"
-                                      id="inputGroupFile001"
-                                    />
-                                    <label
-                                      class="custom-file-label"
-                                      for="inputGroupFile001"
-                                      >Upload media</label
-                                    >
-                                  </div>
-                                </div>
+                                
                               </div>
                             </div>
                           </div>
@@ -227,6 +207,36 @@ document.addEventListener("DOMContentLoaded", () => {
     })
     .catch((error) => console.error("Error fetching task data:", error));
 });
+
+function convertToChecklist(val, containerId) {
+  try {
+    // Parse the input string as a JSON array
+    console.log("value", val);
+    const valuesArray = JSON.parse(JSON.stringify(val));
+    console.log(valuesArray);
+
+    // Check if valuesArray is an array
+    if (Array.isArray(valuesArray)) {
+      // Get the checklist container
+      const checklistContainer = document.getElementById(containerId);
+
+      // Clear existing checklist items
+      checklistContainer.innerHTML = "";
+
+      // Create HTML string for checklist items
+      const checklistHTML = valuesArray
+        .map((value) => `<li>${value.trim()}</li>`)
+        .join("");
+
+      // Append the checklist items to the container
+      checklistContainer.innerHTML = `<ul>${checklistHTML}</ul>`;
+    } else {
+      console.error("Invalid input format. Expected an array:", valuesArray);
+    }
+  } catch (error) {
+    console.error("Error parsing input as JSON:", error);
+  }
+}
 
 // to add task
 function addTask() {
