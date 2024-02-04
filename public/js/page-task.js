@@ -219,17 +219,18 @@ function convertToChecklist(val, containerId) {
     if (Array.isArray(valuesArray)) {
       // Get the checklist container
       const checklistContainer = document.getElementById(containerId);
+      console.log(containerId);
 
       // Clear existing checklist items
-      checklistContainer.innerHTML = "";
+      // checklistContainer.innerHTML = "";
 
       // Create HTML string for checklist items
       const checklistHTML = valuesArray
         .map((value) => `<li>${value.trim()}</li>`)
         .join("");
-
+      console.log(checklistHTML);
       // Append the checklist items to the container
-      checklistContainer.innerHTML = `<ul>${checklistHTML}</ul>`;
+      checklistContainer.appendChild(`<ul>${checklistHTML}</ul>`);
     } else {
       console.error("Invalid input format. Expected an array:", valuesArray);
     }
