@@ -178,10 +178,9 @@ document.addEventListener("DOMContentLoaded", () => {
                                           <label
                                             class="custom-control-label mb-1"
                                             for="customCheck1"
-                                            >${convertToChecklist(
-                                              task.checklist,
-                                              checklist
-                                            )}</label
+                                            >${
+                                              task.checklist
+                                            }</label
                                           >
                                         </div>
                                           </div>
