@@ -178,9 +178,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                           <label
                                             class="custom-control-label mb-1"
                                             for="customCheck1"
-                                            >${
-                                              task.checklist
-                                            }</label
+                                            >${task.checklist}</label
                                           >
                                         </div>
                                           </div>
@@ -246,10 +244,10 @@ function addTask() {
   const dueDate = document.getElementById("dueDate").value;
   const category = document.getElementById("category").value;
   const description = document.getElementById("description").value;
-  const checklist = document
-    .getElementById("checklist")
-    .value.split(",")
-    .map((item) => item.trim());
+  // const checklist = document
+  //   .getElementById("checklist")
+  //   .value.split(",")
+  //   .map((item) => item.trim());
 
   // const attachments = document
   //   .getElementById("attachments")
@@ -263,7 +261,7 @@ function addTask() {
     dueDate: dueDate,
     category: category,
     description: description,
-    checklist: checklist,
+    checklist: "future feature",
     // attachments: attachments,
   };
 
