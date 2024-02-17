@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", async () => {
   const taskDataList = document.getElementById("taskdiv");
+  let project = [];
   const fetchData = async () => {
     try {
       const response = await fetch("/task-data");
@@ -9,6 +10,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       let completed = 0;
       let empcount = 0;
       let count = 0;
+      let projectCount = 0;
 
       const promises = data.map(async (file) => {
         if (file.name === "tasks.json") {
@@ -21,7 +23,38 @@ document.addEventListener("DOMContentLoaded", async () => {
             if (task.status === "completed") {
               completed += 1;
             }
-            console.log(taskcount);
+
+            if (
+              projectCount < 3 &&
+              task.project &&
+              !project.includes(task.project)
+            ) {
+              project.push(task.project);
+
+              console.log(project);
+              if (project[0]) {
+                document.getElementById("proj1").innerText = `${project[0]}`;
+              } else {
+                document.getElementById("p1").remove();
+              }
+              if (project[1]) {
+                document.getElementById("proj2").innerText = `${project[1]}`;
+              } else {
+                document.getElementById("p2").remove();
+              }
+              if (project[2]) {
+                document.getElementById("proj3").innerText = `${project[2]}`;
+              } else {
+                document.getElementById("p3").remove();
+              }
+
+              if (project[0] && project[1] && project[2]) {
+                document.getElementById("projlist").innerHTML =
+                  "No project available";
+              }
+              projectCount += 1;
+            }
+
             if (count - empcount < 4) {
               const taskItem = document.createElement("div");
               taskItem.className = "col-lg-12";
