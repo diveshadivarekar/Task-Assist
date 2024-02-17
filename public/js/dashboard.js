@@ -1,4 +1,51 @@
 document.addEventListener("DOMContentLoaded", async () => {
+  const fetchData = async () => {
+    try {
+      const response = await fetch("/task-data");
+      const data = await response.json();
+
+      let taskcount = 0;
+      let completed = 0;
+      let empcount = 0;
+
+      const promises = data.map(async (file) => {
+        if (file.name === "tasks.json") {
+          const fileId = file.id;
+          try {
+            const response = await fetch(`/task-data/${fileId}`);
+            const task = await response.json();
+
+            if (task.status === "completed") {
+              completed += 1;
+            }
+          } catch (error) {
+            console.error("Error fetching task:", error);
+          }
+        } else if (file.name === "employee.json") {
+          empcount += 1;
+        }
+        taskcount += 1;
+      });
+
+      // Execute all promises concurrently
+      await Promise.all(promises);
+
+      document.getElementById("taskcount").innerText = taskcount;
+      document.getElementById("completedTask").innerText = completed;
+      document.getElementById("inprogress").innerText = taskcount - completed;
+      document.getElementById("empcount").innerText = empcount;
+
+      console.log("total task " + taskcount + " tasks");
+      console.log("completed task " + completed + " completed tasks");
+      console.log("In progress task " + (taskcount - completed) + " tasks");
+      console.log("total employee " + empcount + " employees");
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  fetchData();
+
   // Make the API call to fetch events
   const response = await fetch("/google/calendar");
   const data = await response.json();
