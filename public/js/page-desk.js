@@ -31,7 +31,9 @@ document.addEventListener("DOMContentLoaded", () => {
                               <div class="card-body">
                                 <h5 class="mb-3">${task.taskName}</h5>
                                 <p class="mb-3">
-                                  <i class="las la-calendar-check mr-2"></i>${task.dueDate}
+                                  <i class="las la-calendar-check mr-2"></i>${
+                                    task.dueDate
+                                  }
                                 </p>
                                 <div
                                   class="iq-progress-bar bg-secondary-light mb-4"
@@ -46,12 +48,17 @@ document.addEventListener("DOMContentLoaded", () => {
                                   class="d-flex align-items-center justify-content-between"
                                 >
                                   <div>
-                                  <a href="#" class="btn bg-primary-light"
-                                  >${task.project}</a
-                                >
-                                    <a href="#" class="btn bg-secondary-light"
-                                      >${task.category}</a
-                                    >
+                                  ${
+                                    task.project
+                                      ? `<a href="#" class="btn bg-primary-light mr-3">${task.project}</a>`
+                                      : ""
+                                  }
+                                  
+                                    ${
+                                      task.category
+                                        ? `<a href="#" class="btn bg-secondary-light mr-3">${task.category}</a>`
+                                        : ""
+                                    }
                                   </div>
                                 </div>
                               </div>

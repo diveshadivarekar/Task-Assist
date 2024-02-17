@@ -23,6 +23,9 @@ document.addEventListener("DOMContentLoaded", () => {
             taskDataList.innerHTML = "<p>No task data available.</p>";
           } else {
             taskcount++;
+            if (task.status === "completed") {
+              continue;
+            }
             const taskItem = document.createElement("div");
             taskItem.className = "col-lg-12";
             taskItem.innerHTML = `
@@ -62,12 +65,18 @@ document.addEventListener("DOMContentLoaded", () => {
                                   </div>
                                 </div>
                                 <div class="media align-items-center mt-md-0 mt-3">
-                                <a href="#" class="btn bg-primary-light mr-3"
-                                    >${task.project}</a
-                                  >
-                                  <a href="#" class="btn bg-secondary-light mr-3"
-                                    >${task.category}</a
-                                  >
+                                ${
+                                  task.project
+                                    ? `<a href="#" class="btn bg-primary-light mr-3">${task.project}</a>`
+                                    : ""
+                                }
+                                
+                                  ${
+                                    task.category
+                                      ? `<a href="#" class="btn bg-secondary-light mr-3">${task.category}</a>`
+                                      : ""
+                                  }
+                                  
                                   <a
                                     class="btn bg-secondary-light"
                                     data-toggle="collapse"
