@@ -1642,11 +1642,11 @@
             <div class="row">
               <div class="col-lg-12">
                 <div class="form-group mb-3">
-                  <label for="exampleInputText02" class="h5">Task Name</label>
+                  <label for="taskName" class="h5">Task Name</label>
                   <input
                     type="text"
                     class="form-control"
-                    id="exampleInputText02"
+                    id="taskName"
                     placeholder="Enter task Name"
                   />
                   <a href="#" class="task-edit text-body"
@@ -1656,70 +1656,70 @@
               </div>
               <div class="col-lg-4">
                 <div class="form-group mb-3">
-                  <label for="exampleInputText2" class="h5">Assigned to</label>
-                  <select
-                    name="type"
-                    class="selectpicker form-control"
-                    data-style="py-0"
-                  >
-                    <option>Memebers</option>
-                    <option>Kianna Septimus</option>
-                    <option>Jaxson Herwitz</option>
-                    <option>Ryan Schleifer</option>
-                  </select>
+                  <label for="assignedTo" class="h5">Assign to</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="assignedTo"
+                    placeholder="Name of Members"
+                  />
                 </div>
               </div>
               <div class="col-lg-4">
                 <div class="form-group mb-3">
-                  <label for="exampleInputText05" class="h5">Due Dates*</label>
+                  <label for="dueDate" class="h5">Due Dates*</label>
                   <input
                     type="date"
                     class="form-control"
-                    id="exampleInputText05"
+                    id="dueDate"
                     value=""
                   />
                 </div>
               </div>
               <div class="col-lg-4">
                 <div class="form-group mb-3">
-                  <label for="exampleInputText2" class="h5">Category</label>
-                  <select
-                    name="type"
-                    class="selectpicker form-control"
-                    data-style="py-0"
-                  >
-                    <option>Design</option>
-                    <option>Android</option>
-                    <option>IOS</option>
-                    <option>Ui/Ux Design</option>
-                    <option>Development</option>
-                  </select>
+                  <label for="category" class="h5">Category</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="category"
+                    placeholder="Name of Category"
+                  />
                 </div>
               </div>
               <div class="col-lg-12">
                 <div class="form-group mb-3">
-                  <label for="exampleInputText040" class="h5"
-                    >Description</label
-                  >
+                  <label for="project" class="h5">Project</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="project"
+                    placeholder="Name of Project"
+                  />
+                </div>
+                <div class="form-group mb-3">
+                  <label for="description" class="h5">Description</label>
                   <textarea
                     class="form-control"
-                    id="exampleInputText040"
+                    id="description"
                     rows="2"
                   ></textarea>
                 </div>
               </div>
               <div class="col-lg-12">
                 <div class="form-group mb-3">
-                  <label for="exampleInputText005" class="h5">Checklist</label>
+                  <label for="checklist" class="h5"
+                    >Checklist (comma-separated)</label
+                  >
                   <input
                     type="text"
                     class="form-control"
-                    id="exampleInputText005"
+                    id="checklist"
                     placeholder="Add List"
                   />
                 </div>
               </div>
-              <div class="col-lg-12">
+              <!-- <div class="col-lg-12">
                 <div class="form-group mb-0">
                   <label for="exampleInputText01" class="h5">Attachments</label>
                   <div class="custom-file">
@@ -1733,13 +1733,23 @@
                     >
                   </div>
                 </div>
-              </div>
+              </div> -->
               <div class="col-lg-12">
                 <div
                   class="d-flex flex-wrap align-items-ceter justify-content-center mt-4"
                 >
                   <div class="btn btn-primary mr-3" data-dismiss="modal">
-                    Save
+                    <button
+                      type="button"
+                      style="
+                        background-color: transparent;
+                        border: none;
+                        color: white;
+                      "
+                      onclick="addTask()"
+                    >
+                      Save
+                    </button>
                   </div>
                   <div class="btn btn-primary" data-dismiss="modal">Cancel</div>
                 </div>
