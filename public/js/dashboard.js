@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", async () => {
+  const taskDataList = document.getElementById("taskdiv");
   const fetchData = async () => {
     try {
       const response = await fetch("/task-data");
@@ -7,9 +8,11 @@ document.addEventListener("DOMContentLoaded", async () => {
       let taskcount = 0;
       let completed = 0;
       let empcount = 0;
+      let count = 0;
 
       const promises = data.map(async (file) => {
         if (file.name === "tasks.json") {
+          taskcount += 1;
           const fileId = file.id;
           try {
             const response = await fetch(`/task-data/${fileId}`);
@@ -18,13 +21,59 @@ document.addEventListener("DOMContentLoaded", async () => {
             if (task.status === "completed") {
               completed += 1;
             }
+            console.log(taskcount);
+            if (count - empcount < 4) {
+              const taskItem = document.createElement("div");
+              taskItem.className = "col-lg-12";
+              taskItem.innerHTML = `
+              <div class="col-lg-12">
+              <div class="card">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-sm-8">
+                      <div class="row align-items-center">
+                        <div class="col-md-2">
+                        <svg class="svg-icon" width="25" height="25" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+                        <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+                      </svg>
+                        </div>
+                        <div class="col-md-9">
+                          <div class="mt-3 mt-md-0">
+                            <h5 class="mb-1">${task.taskName}</h5>
+                            <p class="mb-0">
+                              ${task.description}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-sm-4 text-sm-right mt-3 mt-sm-0">
+                    ${
+                      task.project
+                        ? `<a href="#" class="btn btn-white text-primary link-shadow mt-2">${task.project}</a>`
+                        : ""
+                    }
+                    
+                      ${
+                        task.category
+                          ? `<a href="#" class="btn btn-white text-secondary link-shadow mt-2">${task.category}</a>`
+                          : ""
+                      }
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>`;
+              taskDataList.appendChild(taskItem);
+            }
           } catch (error) {
             console.error("Error fetching task:", error);
           }
         } else if (file.name === "employee.json") {
           empcount += 1;
         }
-        taskcount += 1;
+        count += 1;
       });
 
       // Execute all promises concurrently
