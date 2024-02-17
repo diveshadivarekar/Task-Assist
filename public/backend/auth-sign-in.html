@@ -35,23 +35,48 @@
     />
     <style>
       .button {
-        max-width: 320px;
-        display: inline;
-        padding: 0.5rem 1.4rem;
-        font-size: 0.875rem;
-        line-height: 1.25rem;
-        font-weight: 700;
-        text-align: center;
-        text-transform: uppercase;
-        vertical-align: middle;
         align-items: center;
-        border-radius: 0.5rem;
-        border: 1px solid rgba(0, 0, 0, 0.25);
-        gap: 0.75rem;
-        color: rgb(65, 63, 63);
-        background-color: #fff;
-        cursor: pointer;
-        transition: all 0.6s ease;
+ appearance: none;
+ background-color: #FCFCFD;
+ border-radius: 4px;
+ border-width: 0;
+ box-shadow: rgba(45, 35, 66, 0.2) 0 2px 4px,rgba(45, 35, 66, 0.15) 0 7px 13px -3px,#D6D6E7 0 -3px 0 inset;
+ box-sizing: border-box;
+ color: #36395A;
+ cursor: pointer;
+ display: inline-flex;
+ font-family: "JetBrains Mono",monospace;
+ height: 48px;
+ justify-content: center;
+ line-height: 1;
+ list-style: none;
+ overflow: hidden;
+ padding-left: 16px;
+ padding-right: 16px;
+ position: relative;
+ text-align: left;
+ text-decoration: none;
+ transition: box-shadow .15s,transform .15s;
+ user-select: none;
+ -webkit-user-select: none;
+ touch-action: manipulation;
+ white-space: nowrap;
+ will-change: box-shadow,transform;
+ font-size: 18px;
+}
+
+.button:focus {
+ box-shadow: #D6D6E7 0 0 0 1.5px inset, rgba(45, 35, 66, 0.4) 0 2px 4px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
+}
+
+.button:hover {
+ box-shadow: rgba(45, 35, 66, 0.3) 0 4px 8px, rgba(45, 35, 66, 0.2) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
+ transform: translateY(-2px);
+}
+
+.button:active {
+ box-shadow: #D6D6E7 0 3px 7px inset;
+ transform: translateY(2px);
       }
 
       .button svg {
@@ -89,10 +114,10 @@
                     <div class="col-lg-6 bg-primary content-left">
                       <div class="p-3">
                         <h2 class="mb-2 text-white">Sign In</h2>
-                        <p>Login to stay connected.</p>
+                        <!-- <p>Login to stay connected.</p> -->
                         <form>
                           <div class="row">
-                            <div class="col-lg-12">
+                            <!-- <div class="col-lg-12">
                               <div class="floating-label form-group">
                                 <input
                                   class="floating-input form-control"
@@ -132,11 +157,11 @@
                                 class="text-white float-right"
                                 >Forgot Password?</a
                               >
-                            </div>
+                            </div> -->
                           </div>
-                          <button type="submit" class="btn btn-white">
+                          <!-- <button type="submit" class="btn btn-white">
                             Sign In
-                          </button>
+                          </button> -->
                           <button
                             class="button"
                             type="button"
@@ -147,6 +172,7 @@
                               xmlns="http://www.w3.org/2000/svg"
                               preserveAspectRatio="xMidYMid"
                               viewBox="0 0 256 262"
+                              style="padding-right: 5px;"
                             >
                               <path
                                 fill="#4285F4"
@@ -168,14 +194,14 @@
                             Continue with Google
                           </button>
 
-                          <p class="mt-3">
+                          <!-- <p class="mt-3">
                             Create an Account
                             <a
                               href="auth-sign-up.html"
                               class="text-white text-underline"
                               >Sign Up</a
                             >
-                          </p>
+                          </p> -->
                         </form>
                       </div>
                     </div>
