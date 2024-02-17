@@ -39,43 +39,16 @@ document.addEventListener("DOMContentLoaded", () => {
                                   <span
                                     class="bg-secondary iq-progress progress-1"
                                     data-percent="65"
-                                    style="transition: width 2s ease 0s; width: 65%"
+                                    style="transition: width 2s ease 0s; width: 100%"
                                   ></span>
                                 </div>
                                 <div
                                   class="d-flex align-items-center justify-content-between"
                                 >
-                                  <div class="iq-media-group">
-                                    <a href="#" class="iq-media">
-                                      <img
-                                        src="../assets/images/user/01.jpg"
-                                        class="img-fluid avatar-40 rounded-circle"
-                                        alt=""
-                                      />
-                                    </a>
-                                    <a href="#" class="iq-media">
-                                      <img
-                                        src="../assets/images/user/02.jpg"
-                                        class="img-fluid avatar-40 rounded-circle"
-                                        alt=""
-                                      />
-                                    </a>
-                                    <a href="#" class="iq-media">
-                                      <img
-                                        src="../assets/images/user/03.jpg"
-                                        class="img-fluid avatar-40 rounded-circle"
-                                        alt=""
-                                      />
-                                    </a>
-                                    <a href="#" class="iq-media">
-                                      <img
-                                        src="../assets/images/user/04.jpg"
-                                        class="img-fluid avatar-40 rounded-circle"
-                                        alt=""
-                                      />
-                                    </a>
-                                  </div>
                                   <div>
+                                  <a href="#" class="btn bg-primary-light"
+                                  >${task.project}</a
+                                >
                                     <a href="#" class="btn bg-secondary-light"
                                       >${task.category}</a
                                     >

@@ -62,6 +62,9 @@ document.addEventListener("DOMContentLoaded", () => {
                                   </div>
                                 </div>
                                 <div class="media align-items-center mt-md-0 mt-3">
+                                <a href="#" class="btn bg-primary-light mr-3"
+                                    >${task.project}</a
+                                  >
                                   <a href="#" class="btn bg-secondary-light mr-3"
                                     >${task.category}</a
                                   >
@@ -243,6 +246,7 @@ function addTask() {
   const assignedTo = document.getElementById("assignedTo").value;
   const dueDate = document.getElementById("dueDate").value;
   const category = document.getElementById("category").value;
+  const project = document.getElementById("project").value;
   const description = document.getElementById("description").value;
   // const checklist = document
   //   .getElementById("checklist")
@@ -260,6 +264,7 @@ function addTask() {
     assignedTo: assignedTo,
     dueDate: dueDate,
     category: category,
+    project: project,
     description: description,
     checklist: "future feature",
     // attachments: attachments,
