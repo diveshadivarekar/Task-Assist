@@ -42,11 +42,11 @@ document.addEventListener("DOMContentLoaded", () => {
                                     <input
                                       type="checkbox"
                                       class="custom-control-input"
-                                      id="customCheck01"
+                                      id="customCheck${taskcount}"
                                     />
                                     <label
                                       class="custom-control-label"
-                                      for="customCheck01"
+                                      for="customCheck${taskcount}"
                                     ></label>
                                   </div>
                                   <div>
@@ -102,11 +102,11 @@ document.addEventListener("DOMContentLoaded", () => {
                                     <input
                                       type="checkbox"
                                       class="custom-control-input"
-                                      id="customCheck05"
+                                      id="customCheck${taskcount}"
                                     />
                                     <label
                                       class="custom-control-label h5"
-                                      for="customCheck05"
+                                      for="customCheck${taskcount}"
                                       >Mark as done</label
                                     >
                                   </div>
