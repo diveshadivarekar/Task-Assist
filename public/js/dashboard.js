@@ -35,10 +35,10 @@ document.addEventListener("DOMContentLoaded", async () => {
       document.getElementById("inprogress").innerText = taskcount - completed;
       document.getElementById("empcount").innerText = empcount;
 
-      console.log("total task " + taskcount + " tasks");
-      console.log("completed task " + completed + " completed tasks");
-      console.log("In progress task " + (taskcount - completed) + " tasks");
-      console.log("total employee " + empcount + " employees");
+      // console.log("total task " + taskcount + " tasks");
+      // console.log("completed task " + completed + " completed tasks");
+      // console.log("In progress task " + (taskcount - completed) + " tasks");
+      // console.log("total employee " + empcount + " employees");
     } catch (error) {
       console.error("Error fetching data:", error);
     }
