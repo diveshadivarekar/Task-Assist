@@ -61,10 +61,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                       task.category
                                         ? `<a href="#" class="btn bg-secondary-light mr-3">${task.category}</a>`
                                         : ""
-                                    }
-                                    
-                                   
-                                  
+                                    }     
                                     </div>
                                    
                                 </div>
