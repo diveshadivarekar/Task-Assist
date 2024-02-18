@@ -39,11 +39,14 @@ document.addEventListener("DOMContentLoaded", () => {
                                   <div
                                     class="custom-control custom-task custom-checkbox custom-control-inline"
                                   >
-                                    <input
-                                      type="checkbox"
-                                      class="custom-control-input"
-                                      id="customCheck${taskcount}"
-                                    />
+                                  <input
+                                  type="checkbox"
+                                  class="custom-control-input"
+                                  id="customCheck${taskcount}"
+                                  ${
+                                    task.status === "completed" ? "checked" : ""
+                                  }
+                              />
                                     <label
                                       class="custom-control-label"
                                       for="customCheck${taskcount}"
@@ -112,9 +115,9 @@ document.addEventListener("DOMContentLoaded", () => {
                                   </div>
                                 </div>
                                 <div>
-                                  <a href="#" class="btn bg-secondary-light"
-                                    >${task.category}</a
-                                  >
+                                <a href="#" class="btn btn-primary" onclick='deleteFile("${
+                                  file.id
+                                }")'>Delete</a>
                                 </div>
                               </div>
                               <div class="card-body">
@@ -216,6 +219,20 @@ document.addEventListener("DOMContentLoaded", () => {
     })
     .catch((error) => console.error("Error fetching task data:", error));
 });
+
+function deleteFile(fileId) {
+  fetch(`/delete-file/${fileId}`, {
+    method: "GET",
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data); // Handle the response as needed
+    })
+    .catch((error) => {
+      console.error("Error deleting file:", error);
+    });
+  location.reload();
+}
 
 function convertToChecklist(val, containerId) {
   try {

@@ -48,6 +48,9 @@ document.addEventListener("DOMContentLoaded", () => {
                                   class="d-flex align-items-center justify-content-between"
                                 >
                                   <div>
+                                  <a href="#" class="btn btn-primary mr-3" onclick='deleteFile("${
+                                    file.id
+                                  }")'>Delete</a>
                                   ${
                                     task.project
                                       ? `<a href="#" class="btn bg-primary-light mr-3">${task.project}</a>`
@@ -59,7 +62,11 @@ document.addEventListener("DOMContentLoaded", () => {
                                         ? `<a href="#" class="btn bg-secondary-light mr-3">${task.category}</a>`
                                         : ""
                                     }
-                                  </div>
+                                    
+                                   
+                                  
+                                    </div>
+                                   
                                 </div>
                               </div>
                             </div>
@@ -94,3 +101,16 @@ document.addEventListener("DOMContentLoaded", () => {
     })
     .catch((error) => console.error("Error fetching task data:", error));
 });
+function deleteFile(fileId) {
+  fetch(`/delete-file/${fileId}`, {
+    method: "GET",
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data); // Handle the response as needed
+    })
+    .catch((error) => {
+      console.error("Error deleting file:", error);
+    });
+  location.reload();
+}
