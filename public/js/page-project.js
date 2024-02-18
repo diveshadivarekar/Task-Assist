@@ -41,9 +41,9 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
             // Display the count for each element
-            map.forEach((count, key) => {
-              console.log(`Element: ${key}, Count: ${count}`);
-            });
+            // map.forEach((count, key) => {
+            //   console.log(`Element: ${key}, Count: ${count}`);
+            // });
 
             if (map.get(task.project) > 1) {
               break;

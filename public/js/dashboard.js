@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", async () => {
   const taskDataList = document.getElementById("taskdiv");
   let project = [];
+  const colors = ["warning", "secondary", "primary"];
   const fetchData = async () => {
     try {
       const response = await fetch("/task-data");
@@ -11,6 +12,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       let empcount = 0;
       let count = 0;
       let projectCount = 0;
+      let map = new Map();
 
       const promises = data.map(async (file) => {
         if (file.name === "tasks.json") {
@@ -31,27 +33,62 @@ document.addEventListener("DOMContentLoaded", async () => {
             ) {
               project.push(task.project);
 
-              console.log(project);
-              if (project[0]) {
-                document.getElementById("proj1").innerText = `${project[0]}`;
-              } else {
-                document.getElementById("p1").remove();
-              }
-              if (project[1]) {
-                document.getElementById("proj2").innerText = `${project[1]}`;
-              } else {
-                document.getElementById("p2").remove();
-              }
-              if (project[2]) {
-                document.getElementById("proj3").innerText = `${project[2]}`;
-              } else {
-                document.getElementById("p3").remove();
-              }
+              let elements = [task.project];
 
-              if (project[0] && project[1] && project[2]) {
-                document.getElementById("projlist").innerHTML =
-                  "No project available";
+              for (let element of elements) {
+                if (map.has(element)) {
+                  // Element already exists in the Map, increment count
+                  map.set(element, map.get(element) + 1);
+                } else {
+                  // Element doesn't exist in the Map, initialize count to 1
+                  map.set(element, 1);
+                }
               }
+              let color = colors[projectCount];
+              const projectItem = document.createElement("li");
+              projectItem.className = "mb-1";
+              projectItem.style.textAlign = "center";
+              projectItem.style.paddingBottom = "1.5rem";
+              projectItem.innerHTML = `
+              <div class="row">
+                <div class="col-sm-3 d-flex align-items-center">
+                  <svg
+                    class="svg-icon"
+                    width="20"
+                    height="20"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polyline points="6 9 6 2 18 2 18 9"></polyline>
+                    <path
+                      d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"
+                    ></path>
+                    <rect x="6" y="14" width="12" height="8"></rect>
+                  </svg>
+                  <p
+                    id="proj1"
+                    style="margin-left: 20px"
+                    class="mb-0"
+                  >${task.project}</p>
+                </div>
+                <div class="col-sm-8">
+                  <div
+                    class="d-flex align-items-center justify-content-between"
+                  >
+                  <progress class="iq-progress-bar"value="50" max="100"></progress>
+                    
+                    <span class="ml-3">65%</span>
+                  </div>
+                </div>
+              </div>
+                  `;
+              document.getElementById("projlist").appendChild(projectItem);
+
               projectCount += 1;
             }
 
