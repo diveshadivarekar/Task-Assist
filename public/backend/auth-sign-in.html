@@ -90,11 +90,56 @@
         transform: scale(1.02);
       }
     </style>
+
     <script>
       document.addEventListener("DOMContentLoaded", () => {
         fetch("/signout");
       });
     </script>
+    <style>
+      body {
+        background-color: #c9d6ff;
+        background: linear-gradient(to right, #e2e2e2, #c9d6ff);
+        /* background: rgb(223, 96, 161);
+        background: -moz-radial-gradient(
+          circle,
+          rgba(223, 96, 161, 0.6469444467240021) 18%,
+          rgba(8, 99, 169, 0.9690732982646183) 100%
+        );
+        background: -webkit-radial-gradient(
+          circle,
+          rgba(223, 96, 161, 0.6469444467240021) 18%,
+          rgba(8, 99, 169, 0.9690732982646183) 100%
+        );
+        background: radial-gradient(
+          circle,
+          rgba(223, 96, 161, 0.6469444467240021) 18%,
+          rgba(8, 99, 169, 0.9690732982646183) 100%
+        );
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#df60a1",endColorstr="#0863a9",GradientType=1); */
+        /* background: rgb(243, 189, 187);
+        background: -moz-radial-gradient(
+          circle,
+          rgba(243, 189, 187, 1) 0%,
+          rgba(84, 204, 232, 1) 46%,
+          rgba(87, 115, 255, 1) 88%
+        );
+        background: -webkit-radial-gradient(
+          circle,
+          rgba(243, 189, 187, 1) 0%,
+          rgba(84, 204, 232, 1) 46%,
+          rgba(87, 115, 255, 1) 88%
+        );
+        background: radial-gradient(
+          circle,
+          rgba(243, 189, 187, 1) 0%,
+          rgba(84, 204, 232, 1) 46%,
+          rgba(87, 115, 255, 1) 88%
+        );
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f3bdbb',endColorstr='#5773ff',GradientType=1);
+      } */
+      }
+    </style>
   </head>
   <script src="../js/handleSignin.js"></script>
   <body class=" ">
@@ -111,20 +156,46 @@
             class="row align-items-center justify-content-center height-self-center"
           >
             <div class="col-lg-8">
-              <div class="card auth-card">
+              <div
+                class="card auth-card"
+                style="
+                  background-color: #0863a9b0;
+                  border-radius: 30px;
+                  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
+                  position: relative;
+                  overflow: hidden;
+                  width: 768px;
+                  max-width: 100%;
+                  min-height: 480px;
+                  border-color: #666;
+                "
+              >
                 <div class="card-body p-0">
                   <div class="d-flex align-items-center auth-content">
-                    <div class="col-lg-6 bg-primary content-left">
-                      <div style="position: absolute; top: 2.5em; left: 20%">
+                    <div class="col-lg-6 content-left">
+                      <div style="position: absolute; top: 2.5em; left: 19%">
                         <!-- <h1 class="mb-3 text-white">TaskAssist</h1> -->
                         <img
                           src="/assets/images/logo.png"
                           alt="TaskAssist"
-                          style="max-height: 8rem"
+                          style="
+                            max-height: 9rem;
+                            filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.5));
+                          "
                         />
                       </div>
                       <div class="p-3">
-                        <h2 class="mb-2 text-white">Sign In</h2>
+                        <h2
+                          class="mb-2 text-white"
+                          style="
+                            font-size: 2.8em;
+                            position: relative;
+                            top: 10vh;
+                            padding-left: 3%;
+                          "
+                        >
+                          Task Assist
+                        </h2>
                         <!-- <p>Login to stay connected.</p> -->
                         <form>
                           <div class="row">
@@ -178,6 +249,7 @@
                             type="button"
                             onclick="handleSignin()"
                             id="signinButton"
+                            style="margin-top: 75%; padding-left: 1%"
                           >
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
@@ -216,11 +288,20 @@
                         </form>
                       </div>
                     </div>
-                    <div class="col-lg-6 content-right">
+                    <div
+                      class="col-lg-6 content-right"
+                      style="
+                        padding: 2% 0;
+                        background-color: #fff;
+                        border-top-left-radius: 50%;
+                        border-bottom-left-radius: 1%;
+                        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
+                      "
+                    >
                       <img
                         src="../assets/images/login/01.png"
                         class="img-fluid image-right"
-                        alt=""
+                        alt="hero image for login page"
                       />
                     </div>
                   </div>
@@ -231,18 +312,6 @@
         </div>
       </section>
     </div>
-
-    <script>
-      const toastTrigger = document.getElementById("liveToastBtn");
-      const toastLiveExample = document.getElementById("liveToast");
-      if (toastTrigger) {
-        document.addEventListener("DOMContentLoaded", () => {
-          const toast = new bootstrap.Toast(toastLiveExample);
-
-          toast.show();
-        });
-      }
-    </script>
 
     <!-- Backend Bundle JavaScript -->
     <script src="../assets/js/backend-bundle.min.js"></script>
