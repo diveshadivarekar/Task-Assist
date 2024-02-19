@@ -48,7 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                   }")'>Delete</a>
                                   ${
                                     task.project
-                                      ? `<a href="#" class="btn bg-primary-light mr-3">${task.project}</a>`
+                                      ? `<a href="./page-project.html" class="btn bg-primary-light mr-3">${task.project}</a>`
                                       : ""
                                   }
                                   
