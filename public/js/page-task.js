@@ -308,7 +308,8 @@ function addTask() {
     .then((data) => {
       alert(data.message);
       // Redirect to the view_tasks.html page
-      window.location.href = "#";
+      window.location.reload();
+      // window.location.href = "#";
     })
     .catch((error) => console.error("Error adding task:", error));
 }

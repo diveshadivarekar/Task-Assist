@@ -110,6 +110,10 @@ document.addEventListener("DOMContentLoaded", () => {
           console.error("Error fetching file data:", error);
         }
       }
+      // if (Object.keys(map).length === 0) {
+      //   taskDataList.innerHTML = "<p>No Project Found</p>";
+      //   // console.log("no project found");
+      // }
     })
     .catch((error) => console.error("Error fetching task data:", error));
 });
