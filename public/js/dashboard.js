@@ -49,6 +49,7 @@ document.addEventListener("DOMContentLoaded", async () => {
               projectItem.className = "mb-1";
               projectItem.style.textAlign = "center";
               projectItem.style.paddingBottom = "1.5rem";
+              const ranval = Math.floor(Math.random() * 100) + 1;
               projectItem.innerHTML = `
               <div class="row">
                 <div class="col-sm-3 d-flex align-items-center">
@@ -80,9 +81,9 @@ document.addEventListener("DOMContentLoaded", async () => {
                   <div
                     class="d-flex align-items-center justify-content-between"
                   >
-                  <progress class="iq-progress-bar"value="50" max="100"></progress>
+                  <progress class="iq-progress-bar"value="${ranval}" max="100"></progress>
                     
-                    <span class="ml-3">65%</span>
+                    <span class="ml-3">${ranval}%</span>
                   </div>
                 </div>
               </div>
