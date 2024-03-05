@@ -1,6 +1,6 @@
 {
   "name": "Task-Assist",
-  "version": "0.5.6",
+  "version": "0.5.10",
   "description": "Personal Planner",
   "main": "index.js",
   "type": "module",
