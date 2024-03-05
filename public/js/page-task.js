@@ -115,6 +115,9 @@ document.addEventListener("DOMContentLoaded", () => {
                                   </div>
                                 </div>
                                 <div>
+                                <a href="#" class="btn btn-primary mr-3" onclick='updateFile("${
+                                  file.id
+                                }",${taskcount})'>Save</a>
                                 <a href="#" class="btn btn-primary" onclick='deleteFile("${
                                   file.id
                                 }")'>Delete</a>
@@ -125,6 +128,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                   <input
                                     type="text"
                                     class="form-control bg-white"
+                                    id = "taskName"
                                     value="${task.taskName}"
                                   />
                                   <a
@@ -144,6 +148,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                             <input
                                               type="text"
                                               class="form-control bg-white"
+                                              id= "assignedTo"
                                               value="${task.assignedTo}"
                                             />
                                         </div>
@@ -156,7 +161,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                           <input
                                             type="date"
                                             class="form-control"
-                                            id="exampleInputText3"
+                                            id="dueDate"
                                             value="${task.dueDate}"
                                           />
                                         </div>
@@ -173,6 +178,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                           <input
                                             type="text"
                                             class="form-control bg-white"
+                                            id="description"
                                             value="${task.description}"
                                           />
                                         
@@ -220,7 +226,35 @@ document.addEventListener("DOMContentLoaded", () => {
     .catch((error) => console.error("Error fetching task data:", error));
 });
 
-function deleteFile(fileId) {
+async function updateFile(fileId, taskcount) {
+  console.log(fileId);
+  try {
+    const response = await fetch(`/task-data/${fileId}`);
+    const task = await response.json();
+
+    let cbStatus = document.getElementById(`customCheck${taskcount}`).checked;
+    newValue = task;
+
+    newValue.status = cbStatus ? "completed" : "in progress" || "open";
+    newValue.taskName = document.getElementById("taskName").value;
+    newValue.assignedTo = document.getElementById("assignedTo").value;
+    newValue.dueDate = document.getElementById("dueDate").value;
+    newValue.category = document.getElementById("category").value;
+    newValue.project = document.getElementById("project").value;
+    newValue.description = document.getElementById("description").value;
+    // newValue.checklist = task.checklist;
+
+    deleteFile(fileId, (reload = false));
+    addTask(newValue);
+    // console.log(task);
+    console.log("updated and created new file");
+  } catch (error) {
+    console.log(`no data found for ${fileId}`);
+  }
+  console.log("you have clicked the save button");
+}
+
+function deleteFile(fileId, reload = true) {
   fetch(`/delete-file/${fileId}`, {
     method: "GET",
   })
@@ -231,7 +265,9 @@ function deleteFile(fileId) {
     .catch((error) => {
       console.error("Error deleting file:", error);
     });
-  location.reload();
+  if (reload) {
+    location.reload();
+  }
 }
 
 function convertToChecklist(val, containerId) {
@@ -310,6 +346,36 @@ function addTask() {
       // Redirect to the view_tasks.html page
       window.location.reload();
       // window.location.href = "#";
+    })
+    .catch((error) => console.error("Error adding task:", error));
+}
+
+function addTask(oldValues) {
+  const taskData = {
+    status: oldValues.status || "open",
+    taskName: oldValues.taskName,
+    assignedTo: oldValues.assignedTo,
+    dueDate: oldValues.dueDate,
+    category: oldValues.category,
+    project: oldValues.project,
+    description: oldValues.description,
+    checklist: oldValues.checklist || "future feature",
+    // attachments: attachments,
+  };
+
+  // Send the task data to the server
+  fetch("/add-task", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(taskData),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      alert(data.message);
+      // Redirect to the view_tasks.html page
+      window.location.reload();
     })
     .catch((error) => console.error("Error adding task:", error));
 }
