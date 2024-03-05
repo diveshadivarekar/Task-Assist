@@ -1,15 +1,9 @@
-// As per rudra's plan the project dir should contain the file id of the respective tasks
-// the project dir should be eaily update able when new task is added in the project (api endpoint is created and uses stream)
-// this is the basic plan that whould be implemeted in stable version of v0.5.4 (v0.5.3 require the add task and page_task to be optimized and #15 should be resolved )
-
 import dotenv from "dotenv";
 dotenv.config();
 import { google } from "googleapis";
 import express from "express";
 import bodyParser from "body-parser";
-import fs from "fs";
 import cookieParser from "cookie-parser";
-import CryptoJS from "crypto-js";
 import axios from "axios";
 import stream from "stream";
 
@@ -49,7 +43,6 @@ app.use((req, res, next) => {
       console.error("Error parsing OAuth tokens from cookie", err);
     }
   }
-
   next();
 });
 
