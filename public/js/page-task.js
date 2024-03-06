@@ -128,7 +128,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                   <input
                                     type="text"
                                     class="form-control bg-white"
-                                    id = "taskName"
+                                    id = "taskNameinfo"
                                     value="${task.taskName}"
                                   />
                                   <a
@@ -227,7 +227,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 async function updateFile(fileId, taskcount) {
-  console.log(fileId);
+  // console.log(fileId);
   try {
     const response = await fetch(`/task-data/${fileId}`);
     const task = await response.json();
@@ -236,7 +236,7 @@ async function updateFile(fileId, taskcount) {
     newValue = task;
 
     newValue.status = cbStatus ? "completed" : "in progress" || "open";
-    newValue.taskName = document.getElementById("taskName").value;
+    newValue.taskName = document.getElementById("taskNameinfo").value;
     newValue.assignedTo = document.getElementById("assignedTo").value;
     newValue.dueDate = document.getElementById("dueDate").value;
     newValue.category = document.getElementById("category").value;
@@ -245,13 +245,13 @@ async function updateFile(fileId, taskcount) {
     // newValue.checklist = task.checklist;
 
     deleteFile(fileId, (reload = false));
-    addTask(newValue);
+    updateTask(newValue);
     // console.log(task);
-    console.log("updated and created new file");
+    // console.log("updated and created new file");
   } catch (error) {
     console.log(`no data found for ${fileId}`);
   }
-  console.log("you have clicked the save button");
+  // console.log("you have clicked the save button");
 }
 
 function deleteFile(fileId, reload = true) {
@@ -350,7 +350,7 @@ function addTask() {
     .catch((error) => console.error("Error adding task:", error));
 }
 
-function addTask(oldValues) {
+function updateTask(oldValues) {
   const taskData = {
     status: oldValues.status || "open",
     taskName: oldValues.taskName,
