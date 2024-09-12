@@ -1,8 +1,6 @@
 <br />
 <div align="center">
-  <a href="https://github.com/othneildrew/Best-README-Template">
     <img src="public/assets/images/logo.svg" alt="Logo" height="100">
-  </a>
   <h1 align="center">Task Assist</h1>
 </div>
 
