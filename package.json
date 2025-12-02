@@ -17,7 +17,7 @@
     "body-parser": "^2.2.1",
     "cookie-parser": "^1.4.7",
     "dotenv": "^17.2.3",
-    "express": "^5.2.0",
+    "express": "^5.2.1",
     "googleapis": "^166.0.0",
     "stream": "^0.0.3"
   },
