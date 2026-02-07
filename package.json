@@ -16,7 +16,7 @@
     "axios": "^1.13.4",
     "body-parser": "^2.2.2",
     "cookie-parser": "^1.4.7",
-    "dotenv": "^17.2.3",
+    "dotenv": "^17.2.4",
     "express": "^5.2.1",
     "googleapis": "^171.2.0",
     "stream": "^0.0.3"
