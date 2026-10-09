@@ -20,7 +20,7 @@
     "cookie-parser": "^1.4.7",
     "dotenv": "^18.0.5",
     "express": "^5.2.1",
-    "googleapis": "^182.0.0",
+    "googleapis": "^183.0.0",
     "stream": "^0.0.3"
   },
   "devDependencies": {
